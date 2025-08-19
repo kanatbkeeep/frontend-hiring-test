@@ -250,15 +250,22 @@ export const Chat: React.FC = () => {
   if (loading) return <div>Loading messages...</div>;
   if (error) return <div>Error loading messages: {error.message}</div>;
 
+  const handleEndReached = () => {
+    if (hasNextPage && !loading) {
+      loadMore();
+    }
+  };
+
   return (
     <div className={css.root}>
       <div className={css.container}>
-        {hasNextPage && (
-          <div style={{ padding: '10px', textAlign: 'center' }}>
-            <button onClick={loadMore}>Load More Messages</button>
-          </div>
-        )}
-        <Virtuoso className={css.list} data={messages} itemContent={getItem} />
+        <Virtuoso 
+          className={css.list} 
+          data={messages} 
+          itemContent={getItem}
+          endReached={handleEndReached}
+          followOutput="smooth"
+        />
       </div>
       <form className={css.footer} onSubmit={handleSendMessage}>
         <input
