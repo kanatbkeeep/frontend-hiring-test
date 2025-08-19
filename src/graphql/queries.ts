@@ -22,3 +22,27 @@ export const GET_MESSAGES = gql`
     }
   }
 `;
+
+export const MESSAGE_ADDED_SUBSCRIPTION = gql`
+  subscription MessageAdded {
+    messageAdded {
+      id
+      text
+      status
+      updatedAt
+      sender
+    }
+  }
+`;
+
+export const MESSAGE_UPDATED_SUBSCRIPTION = gql`
+  subscription MessageUpdated {
+    messageUpdated {
+      id
+      text
+      status
+      updatedAt
+      sender
+    }
+  }
+`;
